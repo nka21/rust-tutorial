@@ -53,8 +53,13 @@ fn main() {
         */
 
         // string型からu32型へ型変換
-        let guess: u32 = guess.trim().parse()
-            .expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(e) => {
+                println!("Error parsing guess: {}", e);
+                continue
+            },
+        };
 
         /*
             let x = 5;
