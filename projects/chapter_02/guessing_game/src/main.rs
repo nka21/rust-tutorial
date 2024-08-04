@@ -16,57 +16,60 @@ fn main() {
     // 開発用のために、回答の数字を出力させる
     println!("The secret number is: {}", secret_number);
 
-    println!("Please input your guess.");
+    // 無限ループ
+    loop {
+        println!("Please input your guess.");
 
-    /*
-        let apples = 5; // 不変
-        let mut bananas = 5; // 可変
-    */
+        /*
+            let apples = 5; // 不変
+            let mut bananas = 5; // 可変
+        */
 
-    let mut guess = String::new(); // String型の新しいインスタンスを作成
+        let mut guess = String::new(); // String型の新しいインスタンスを作成
 
 
-    io::stdin()
-        .read_line(&mut guess) // 入力をguessに格納
-        .expect("Failed to read line"); // 入力処理に対するエラー処理
+        io::stdin()
+            .read_line(&mut guess) // 入力をguessに格納
+            .expect("Failed to read line"); // 入力処理に対するエラー処理
 
-    /*
-        前後の空白を削除
-        入力直後のEnterキーによって、
-        guessに改行文字(\n)が入ってしまうため
-        trim()
+        /*
+            前後の空白を削除
+            入力直後のEnterキーによって、
+            guessに改行文字(\n)が入ってしまうため
+            trim()
 
-        文字列をパース(解析)して、数値型にする
-        parse()
+            文字列をパース(解析)して、数値型にする
+            parse()
 
-        guessの後にコロンを付けることで、
-        変数の型に型注釈をすることができる
-        guess:
+            guessの後にコロンを付けることで、
+            変数の型に型注釈をすることができる
+            guess:
 
-        parseメソッドは、
-        論理的に数値に変換できる文字にしか使えないため、
-        よくエラーになることがあるため記述
-        変換できない文字列: (A👍%)
-        .expect()
-     */
+            parseメソッドは、
+            論理的に数値に変換できる文字にしか使えないため、
+            よくエラーになることがあるため記述
+            変換できない文字列: (A👍%)
+            .expect()
+        */
 
-    // string型からu32型へ型変換
-    let guess: u32 = guess.trim().parse()
-        .expect("Please type a number!");
+        // string型からu32型へ型変換
+        let guess: u32 = guess.trim().parse()
+            .expect("Please type a number!");
 
-    /*
-        let x = 5;
-        let y = 10;
+        /*
+            let x = 5;
+            let y = 10;
 
-        println!("x = {} and y = {}", x, y); // x = 5 and y = 10
-    */
+            println!("x = {} and y = {}", x, y); // x = 5 and y = 10
+        */
 
-    println!("You guessed: {}", guess); // {}に、第２引数のguessが入る
+        println!("You guessed: {}", guess); // {}に、第２引数のguessが入る
 
-    // guess と secret_number の値の比較
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!"),
+        // guess と secret_number の値の比較
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => println!("You win!"),
+        }
     }
 }
