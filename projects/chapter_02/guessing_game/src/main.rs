@@ -1,8 +1,20 @@
-// 標準入出力を行うための io というライブラリ
+// 標準入出力を行うための io ライブラリ
 use std::io;
+// 乱数を生成するための Rng ライブラリ
+use rand::Rng;
 
 fn main() {
     println!("Guess the number!");
+
+    /*
+        gen_range(1..101) // 下限値は含むが、上限値は含まない
+     */
+
+    // 乱数を、 1 ~ 100 までの間で生成する
+    let secret_number = rand::thread_rng().gen_range(1..101);
+
+    // 開発用のために、回答の数字を出力させる
+    println!("The secret number is: {}", secret_number);
 
     println!("Please input your guess.");
 
