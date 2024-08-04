@@ -71,12 +71,25 @@ fn main() {
         println!("You guessed: {}", guess); // {}に、第２引数のguessが入る
 
         // guess と secret_number の値の比較
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
-            Ordering::Equal => {
-                println!("You win!");
-                break; // 予想と回答が一致すれば終了
+        // i32型とは、符号付き整数型。 正の数と負の数の両方を表現できる
+        let difference = (guess as i32 - secret_number as i32).abs(); // 2つの値の計算結果の絶対値
+        if difference >= 30 {
+            match guess.cmp(&secret_number) {
+                Ordering::Less => println!("小さすぎます！"),
+                Ordering::Greater => println!("大きすぎます！"),
+                Ordering::Equal => {
+                    println!("正解！");
+                    break;
+                }
+            }
+        } else {
+            match guess.cmp(&secret_number) {
+                Ordering::Less => println!("少し小さい！"),
+                Ordering::Greater => println!("少し大きい！"),
+                Ordering::Equal => {
+                    println!("正解！");
+                    break;
+                }
             }
         }
     }
