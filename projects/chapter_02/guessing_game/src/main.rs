@@ -1,7 +1,7 @@
-// 標準入出力を行うための io ライブラリ
-use std::io;
-// 乱数を生成するための Rng ライブラリ
-use rand::Rng;
+use rand::Rng; // 乱数を生成するための Rng ライブラリ
+use std::cmp::Ordering; //
+use std::io; // 標準入出力を行うための io ライブラリ
+
 
 fn main() {
     println!("Guess the number!");
@@ -31,6 +31,30 @@ fn main() {
         .expect("Failed to read line"); // 入力処理に対するエラー処理
 
     /*
+        前後の空白を削除
+        入力直後のEnterキーによって、
+        guessに改行文字(\n)が入ってしまうため
+        trim()
+
+        文字列をパース(解析)して、数値型にする
+        parse()
+
+        guessの後にコロンを付けることで、
+        変数の型に型注釈をすることができる
+        guess:
+
+        parseメソッドは、
+        論理的に数値に変換できる文字にしか使えないため、
+        よくエラーになることがあるため記述
+        変換できない文字列: (A👍%)
+        .expect()
+     */
+
+    // string型からu32型へ型変換
+    let guess: u32 = guess.trim().parse()
+        .expect("Please type a number!");
+
+    /*
         let x = 5;
         let y = 10;
 
@@ -38,4 +62,11 @@ fn main() {
     */
 
     println!("You guessed: {}", guess); // {}に、第２引数のguessが入る
+
+    // guess と secret_number の値の比較
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
 }
